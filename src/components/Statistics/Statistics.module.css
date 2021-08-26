@@ -1,0 +1,8 @@
+.statList {
+  list-style: none;
+}
+
+.statList p {
+  font-size: 28px;
+  font-weight: 500;
+}

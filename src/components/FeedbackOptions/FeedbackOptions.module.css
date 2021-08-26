@@ -1,0 +1,18 @@
+.wrapper {
+  padding-left: 15px;
+}
+
+.btn {
+  width: max-content;
+  height: 25px;
+  margin-right: 10px;
+  padding: 0 10px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  box-shadow: 0 2px 3px 0 gray;
+  cursor: pointer;
+  outline: none;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+}

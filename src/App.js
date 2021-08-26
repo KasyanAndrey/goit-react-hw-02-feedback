@@ -4,6 +4,7 @@ import FeedbackOptions from './components/FeedbackOptions';
 import Notification from './components/Notification';
 import Statistics from './components/Statistics';
 import Title from './components/Title';
+import './index.css';
 
 class App extends Component {
   static defaultProps = {
@@ -16,50 +17,41 @@ class App extends Component {
     bad: this.props.initialValue,
   };
 
-  onLeaveFeedback = event => {
-    const feedback = event.target.textContent;
+  handleFeedbacksClick = event => {
+    const { name } = event.target;
 
-    if (feedback === 'Good') {
-      this.setState(prevState => ({
-        good: prevState.good + 1,
-      }));
-    } else if (feedback === 'Neutral') {
-      this.setState(prevState => ({
-        neutral: prevState.neutral + 1,
-      }));
-    } else if (feedback === 'Bad') {
-      this.setState(prevState => ({
-        bad: prevState.bad + 1,
-      }));
-    }
+    this.setState(prevState => ({
+      [name]: prevState[name] + 1,
+    }));
   };
 
-  countTotalFeedback() {
+  countTotalFeedback = () => {
     const total = Object.values(this.state).reduce(
       (acc, item) => acc + item,
       0,
     );
 
     return total;
-  }
+  };
 
-  countPositiveFeedbackPercentage() {
+  countPositiveFeedbackPercentage = () => {
     const { good } = this.state;
     const total = this.countTotalFeedback();
     const percentage = total ? Math.round((good / total) * 100) : 0;
 
     return percentage;
-  }
+  };
 
   render() {
     const { good, neutral, bad } = this.state;
-    const options = ['Good', 'Neutral', 'Bad'];
+    const options = Object.keys(this.state);
+
     return (
       <section>
         <Title text="Please leave feedback" />
         <FeedbackOptions
           options={options}
-          onLeaveFeedback={this.onLeaveFeedback}
+          onLeaveFeedback={this.handleFeedbacksClick}
         />
         <Title text="Statistics" />
         {this.countPositiveFeedbackPercentage() !== 0 ? (
